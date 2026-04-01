@@ -1,10 +1,10 @@
 package com.abidnabil.expensio
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +19,10 @@ class ExpenseFragment : Fragment(), ExpenseAdapter.OnItemClickListeners {
 
     private lateinit var binding: FragmentExpenseBinding
     private lateinit var adapter: ExpenseAdapter
+
+    private val sharedPrefs by lazy {
+        context?.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +40,8 @@ class ExpenseFragment : Fragment(), ExpenseAdapter.OnItemClickListeners {
 
         binding.recyclerViewListExpense.adapter = adapter
 
-
+        totalExpenseDisplay()
+        textInputVisibility()
 
         setupOnClickListeners()
 
@@ -76,8 +81,6 @@ class ExpenseFragment : Fragment(), ExpenseAdapter.OnItemClickListeners {
                         item.title.lowercase(getDefault()).contains(searchKey)
                     } as MutableList<Expense>
 
-                Log.v("Expense", searchResults.toString())
-
                 if (searchKey.isEmpty()) {
                     adapter.expenseList = AppData.expenseList
                 } else {
@@ -92,7 +95,9 @@ class ExpenseFragment : Fragment(), ExpenseAdapter.OnItemClickListeners {
 
     override fun onResume() {
         super.onResume()
+
         adapter.notifyDataSetChanged()
+        totalExpenseDisplay()
         textInputVisibility()
     }
 
@@ -104,6 +109,9 @@ class ExpenseFragment : Fragment(), ExpenseAdapter.OnItemClickListeners {
                 AppData.expenseList.removeAt(position)
                 adapter.notifyItemRemoved(position)
                 adapter.notifyItemRangeChanged(position, AppData.expenseList.size)
+
+                totalExpenseDisplay()
+                textInputVisibility()
 
                 Snackbar.make(
                     binding.frameContainer,
@@ -121,9 +129,22 @@ class ExpenseFragment : Fragment(), ExpenseAdapter.OnItemClickListeners {
 
     private fun textInputVisibility() {
         if (AppData.expenseList.isEmpty()) {
-            binding.textInputSearch.visibility = View.INVISIBLE
+            binding.textInputSearch.visibility = View.GONE
+            binding.cardViewData.visibility = View.GONE
         } else {
             binding.textInputSearch.visibility = View.VISIBLE
+            binding.cardViewData.visibility = View.VISIBLE
+        }
+    }
+
+    private fun totalExpenseDisplay() {
+        if (!AppData.expenseList.isEmpty()) {
+            binding.totalExpense.setText(
+                AppData.totalExpense().toString() + " " + sharedPrefs?.getString("currency", null)
+            )
+
+        } else {
+            binding.totalExpense.setText("0" + " " + sharedPrefs?.getString("currency", null))
         }
     }
 

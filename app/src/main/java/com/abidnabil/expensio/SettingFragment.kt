@@ -18,8 +18,6 @@ import com.google.android.material.snackbar.Snackbar
 class SettingFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingBinding
-    private var firstLoadRadio: Boolean = true
-    private var firstLoadSpinner: Boolean = true
     private val sharedPrefs by lazy {
         requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
     }

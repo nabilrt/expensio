@@ -75,8 +75,6 @@ class ExpenseAdapter(
     }
 
     override fun getItemCount(): Int {
-        android.util.Log.d("ExpenseAdapter", "itemCount = ${expenseList.size}")
-
         return expenseList.size
     }
 

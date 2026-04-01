@@ -50,9 +50,6 @@ class UpsertExpenseActivity : AppCompatActivity() {
                     binding.editTextExpenseDate.text.toString()
                 )
             )
-
-            Log.v("AppData", AppData.expenseList.toString())
-
             finish()
 
         } else {

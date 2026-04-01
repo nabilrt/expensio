@@ -22,4 +22,6 @@
     <string name="light">Light</string>
     <string name="change_theme">Change Theme</string>
     <string name="change_currency">Change Currency</string>
+    <string name="expensio">EXPENSIO</string>
+    <string name="total_expense">Total Expense</string>
 </resources>
