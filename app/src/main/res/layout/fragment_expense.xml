@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/header_frame"
@@ -35,38 +34,6 @@
 
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/header_frame"
-        android:id="@+id/buttons_layout"
-        >
-        <TextView
-            android:id="@+id/expense_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/all_expenses"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_add_expense"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            app:icon="@drawable/outline_add_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_search"
@@ -76,7 +43,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toTopOf="@id/recycler_view_list_expense"
-        app:layout_constraintTop_toBottomOf="@id/buttons_layout">
+        app:layout_constraintTop_toBottomOf="@id/header_frame">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/text_view_search"
@@ -102,8 +69,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
-            >
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,6 +103,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_view_data"
         tools:listitem="@layout/item_expense" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_add_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="36dp"
+        android:backgroundTint="@color/blue_500"
+        android:contentDescription="@string/add_expense"
+        android:src="@drawable/outline_add_24"
+        android:text="@string/add"
+        app:icon="@drawable/outline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
