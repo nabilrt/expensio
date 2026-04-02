@@ -1,8 +1,9 @@
 package com.abidnabil.expensio
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.abidnabil.expensio.databinding.ActivityUpsertExpenseBinding
 
 class UpsertExpenseActivity : AppCompatActivity() {
@@ -20,6 +21,11 @@ class UpsertExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUpsertExpenseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, systemBars.top, 0, systemBars.bottom)
+            insets
+        }
         if (insertType == "update") {
             initialRecord()
 
